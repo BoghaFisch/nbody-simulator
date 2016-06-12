@@ -11,4 +11,4 @@ The algorithms implemented and compared were the following:
 
     4) A parallelized O(N*log N) program using the Barnes-Hut method.
 
-For more details on the results and implementation, see the report (<a href="https://github.com/BoghaFisch/nbody-simulator/blob/master/nbody_project_lindstrom_david.pdf" target="_blank">nbody_project_lindstrom_david.pdf</a>)
+For more details on the results and implementation, see the report (<a href="https://github.com/BoghaFisch/nbody-simulator/blob/master/nbody_project_lindstrom_david.pdf"  target="_blank">nbody_project_lindstrom_david.pdf</a>)
