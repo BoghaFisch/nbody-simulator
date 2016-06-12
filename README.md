@@ -1,7 +1,7 @@
 # nbody-simulator
 A performance comparison between a set of parallel and sequential algorithms for gravitational n-body simulation.
 
-The algorithms compared were the following:
+The algorithms implemented and compared were the following:
 
     1) A sequential O(N^2) program.
 
