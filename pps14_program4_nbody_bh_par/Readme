@@ -1,0 +1,56 @@
+2) A parallel N*logN program using the Barnes-Hut method.
+
+SOURCE CODE: /src/
+COMPILED: /bin/
+
+main: In Main-class
+
+___________________________________________
+
+HOW TO RUN:
+
+Either compile the files in the /src/ folder, or run the already compiled files in /bin/.
+
+The following is the form for running the program:
+
+java Main [gnumBodies] [numSteps] [far] [numWorkers]
+
+___________________________________________
+
+ARGS:
+
+[gnumBodies]
+- The number of bodies to be used.
+- Default 120 bodies.
+- Since the file read from only contains 300 bodies, it can at max be set to 300.
+
+[numSteps]
+- Number of timesteps.
+- Default is set to 17000.
+
+[far]
+- Constant for when to approximate or not.
+- The higher value, the more approximations are made.
+- Default set to 2.1.
+
+[numWorkers]
+- The number of workers to be used.
+- Default is 2.
+__________________________________________
+
+EXAMPLES
+
+java Main 200
+- Runs the program with 200 bodies, 17000 timesteps [default], 2.1 as far [default] and 2 workers [default].
+
+java Main 200 10000
+- Runs the program with 200 bodies and 10000 timesteps. Far is 2.1 [default] and numWorkers is 2 [default].
+
+java Main 200 10000 1
+- Runs the program with 200 bodies, 10000 timesteps and far set to 1. numWorkers is 2 [default].
+
+java Main 200 10000 1 4
+- Runs the program with 200 bodies, 10000 timesteps, far 2.1 and 4 workers.
+
+java Main
+- 120 bodies, 17000 timesteps, far set to 2.1 and 2 workers [all default]

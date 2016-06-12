@@ -1,0 +1,41 @@
+2) A sequential N^2 program
+
+SOURCE CODE: /src/
+COMPILED: /bin/
+
+main: In Main-class
+
+___________________________________________
+
+HOW TO RUN:
+
+Either compile the files in the /src/ folder, or run the already compiled files in /bin/.
+
+The following is the form for running the program:
+
+java Main [gnumBodies] [numSteps]
+
+___________________________________________
+
+ARGS:
+
+[gnumBodies]
+- The number of bodies to be used.
+- Default 120 bodies.
+- Since the file read from only contains 300 bodies, it can at max be set to 300.
+
+[numSteps]
+- Number of timesteps.
+- Default is set to 17000.
+__________________________________________
+
+EXAMPLES
+
+java Main 200
+- Runs the program with 200 bodies and 17000 timesteps [default]
+
+java Main 200 10000
+- Runs the program with 200 bodies and 10000 timesteps.
+
+java Main
+- 120 bodies and 17000 timesteps [both default]

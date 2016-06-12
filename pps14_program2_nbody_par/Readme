@@ -1,0 +1,48 @@
+2) A parallel N^2 program
+
+SOURCE CODE: /src/
+COMPILED: /bin/
+
+main: In Main-class
+
+___________________________________________
+
+HOW TO RUN:
+
+Either compile the files in the /src/ folder, or run the already compiled files in /bin/.
+
+The following is the form for running the program:
+
+java Main [gnumBodies] [numSteps] [numWorkers]
+
+___________________________________________
+
+ARGS:
+
+[gnumBodies]
+- The number of bodies to be used.
+- Default 120 bodies.
+- Since the file read from only contains 300 bodies, it can at max be set to 300.
+
+[numSteps]
+- Number of timesteps.
+- Default is set to 17000.
+
+[numWorkers]
+- The number of workers to be used.
+- Default is set to 2.
+__________________________________________
+
+EXAMPLES
+
+java Main 200
+- Runs the program with 200 bodies, 17000 timesteps [default] and 2 workers [default]
+
+java Main 200 10000
+- Runs the program with 200 bodies, 10000 timesteps and 2 workers [default].
+
+java Main 200 10000 4
+- Runs the program with 200 bodies, 10000 timesteps and 4 workers.
+
+java Main
+- 120 bodies, 17000 timesteps and 2 workers [all default]
