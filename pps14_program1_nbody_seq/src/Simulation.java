@@ -26,13 +26,8 @@ public class Simulation {
 		long startTime = System.nanoTime();
 		for (int i = 0; i < numSteps; i++)
 		{
-			// Calculate the forces on each body
 			calculateForces();
-			
-			// Move the bodies
 			moveBodies();
-			
-			// Display graphics (if requested)
 			if (Main.DISPLAY_GRAPHICS)
 			{
 				vis.repaint();
@@ -48,7 +43,6 @@ public class Simulation {
 				}
 			}
 		}
-		// Print the time taken for the simulation
 		System.out.println("Nanoseconds taken for simulation: "+(System.nanoTime()-startTime));
 	}
 	public void calculateForces()
@@ -69,13 +63,10 @@ public class Simulation {
 				{
 					distance = 10;
 				}
-				// Calculate magnitude
-				magnitude = (g*bodies[i].getM()*bodies[j].getM())/Math.pow(distance, 2);
 				
-				// Calculate force direction
+				magnitude = (g*bodies[i].getM()*bodies[j].getM())/Math.pow(distance, 2);
 				direction = new Point2D.Double(bodies[j].getP().x-bodies[i].getP().x, bodies[j].getP().y-bodies[i].getP().y);
 				
-				// Update forces
 				bodies[i].setFx(bodies[i].getFx() + magnitude*direction.x/distance);
 				bodies[j].setFx(bodies[j].getFx() - magnitude*direction.x/distance);
 				bodies[i].setFy(bodies[i].getFy() + magnitude*direction.y/distance);
@@ -85,25 +76,19 @@ public class Simulation {
 	}
 	public void moveBodies()
 	{
-		// Differences in speed and position for this "tick"
 		Point2D.Double deltaV, deltaP;
 		
-		// For each body
 		for (int i = 0; i < gnumBodies; i++)
 		{
-			// Calculate differences in speed and position
 			deltaV = new Point2D.Double(bodies[i].getFx()/bodies[i].getM(), bodies[i].getFy()/bodies[i].getM());
 			deltaP = new Point2D.Double(bodies[i].getVx()+deltaV.x/2, bodies[i].getVy()+deltaV.y/2);
 			
-			// Set new speed
 			bodies[i].setVx(bodies[i].getVx()+deltaV.x);
 			bodies[i].setVy(bodies[i].getVy()+deltaV.y);
 
-			// Set new position
 			bodies[i].setPx(bodies[i].getPx()+deltaP.x);
 			bodies[i].setPy(bodies[i].getPy()+deltaP.y);
 			
-			// Reset force-vector
 			bodies[i].resetF();		
 		}
 	}
