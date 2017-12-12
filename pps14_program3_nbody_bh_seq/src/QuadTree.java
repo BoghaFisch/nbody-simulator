@@ -162,7 +162,6 @@ public class QuadTree
 	 */
 	public void subdivide()
 	{
-		// Initialize child-array
 		children = new QuadTree[4];
 		
 		// Calculate border-coordinates
@@ -260,7 +259,6 @@ public class QuadTree
 		}
 		else return false;
 	}
-	// Get and set methods below
 	public QuadTree getParent()
 	{
 		return parent;
