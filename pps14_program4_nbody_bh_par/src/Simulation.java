@@ -25,8 +25,6 @@ public class Simulation {
 		this.far = far;
 		this.numWorkers = numWorkers;
 		numSplits = calcNumSplits();
-		
-		// Initialize a threadpool with numWorkers workers
 		e = Executors.newFixedThreadPool(numWorkers);
 		
 		if (Main.DISPLAY_GRAPHICS)
@@ -38,32 +36,23 @@ public class Simulation {
 	public void runSimulation()
 	{
 		long s = System.nanoTime();
-		
-		// For each timestep, calculate forces and move the bodies
 		for (int i = 0; i < numSteps; i++)
 		{
 			calculateForces();
 			moveBodies();
 		}
-		// Shut down threadpool
-		e.shutdown();
 		
-		// Print the time taken for the simulation
+		e.shutdown();
 		System.out.println("Nanoseconds taken for simulation: "+(System.nanoTime()-s));
 	}
 	public void calculateForces()
 	{
-		// Construct a new QuadTree
 		constructQuadTree();
-		
-		// Display graphics
 		displayGraphics();
 		
-		// Create a counterbarrier with numWorkers cap
 		CounterBarrier cb = new CounterBarrier(numWorkers);
 		for (int i = 0; i < numWorkers; i++)
 		{
-			// Submit numWorkers force-calculator threads to the threadpool
 			e.submit(new ForceCalcThread(i, bodies, qt, numWorkers, cb));
 		}
 		// Main-thread waits until all force-calculations are done
@@ -74,7 +63,6 @@ public class Simulation {
 	}
 	public void moveBodies()
 	{
-		// Create a counterbarrier with numWorkers as cap
 		CounterBarrier cb = new CounterBarrier(numWorkers);
 		for (int i = 0; i < numWorkers; i++)
 		{
@@ -105,12 +93,10 @@ public class Simulation {
 	}
 	public void insertBodies()
 	{
-		// Get the quadrants to be used for insertion.
 		LinkedList<QuadTree> workerQuadrants = getWorkerQuadrants();
-		
-		// Create counterbarrier. One for each quadrant
 		CounterBarrier cb = new CounterBarrier(workerQuadrants.size());
 		int counter = 0;
+		
 		for (QuadTree wq : workerQuadrants)
 		{
 			// Create an InsertionThread for each quadrant
