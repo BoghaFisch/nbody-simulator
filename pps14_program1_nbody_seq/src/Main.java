@@ -43,14 +43,11 @@ public class Main {
 	public static Simulation readInput()
 	{
 		Simulation sim = null;
-		
-		// If RANDOMIZE_INPUT => randomize input..
 		if (RANDOMIZE_INPUT)
 		{
 			InputRandomizer ir = new InputRandomizer();
 			sim = ir.getRandomInstance(gnumBodies, numSteps, G);
 		}
-		// Else we assume that we have a file to read from
 		else
 		{
 			try 
@@ -69,7 +66,7 @@ public class Main {
 				
 				String[] components;
 				String line;
-				// Create bodies by reading from file. file[0]=p.x, file[1]=p.y, file[2] = m
+				
 				for (int i = 0; i < gnumBodies; i++)
 				{
 					line = br.readLine();
@@ -82,7 +79,6 @@ public class Main {
 				}
 				br.close();
 				
-				// Return a simulation for the bodies read
 				return new Simulation(bodies, G, numSteps);
 			} 
 			catch (IOException e) 
@@ -95,13 +91,8 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		// Read arguments to initialize simulation constants
 		readArgs(args);
-
-		// Read input and get a Simulation-object back
 		Simulation sim = readInput();
-		
-		// Run the simulation
 		sim.runSimulation();
 	}
 
