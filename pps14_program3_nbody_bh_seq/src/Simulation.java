@@ -20,7 +20,6 @@ public class Simulation {
 		qt = new QuadTree(null, -3000, 3000, -3000, 3000);
 		this.far = far;
 		
-		// Create a Visualizer-object if we want to display graphics
 		if (Main.DISPLAY_GRAPHICS)
 		{
 			vis = new QTVisualizer(qt, bodies);
@@ -30,7 +29,6 @@ public class Simulation {
 	{
 		long s = System.nanoTime();
 		
-		// For each timestep, calculate forces and move bodies
 		for (int i = 0; i < numSteps; i++)
 		{
 			calculateForces();
@@ -44,7 +42,6 @@ public class Simulation {
 	}
 	public void calculateForces()
 	{
-		// Display graphics
 		if (Main.DISPLAY_GRAPHICS)
 		{
 			try 
@@ -70,16 +67,12 @@ public class Simulation {
 			qt = new QuadTree(null, -3000, 3000, -3000, 3000);
 		}
 		
-		// Insert bodies to QuadTree
 		for (int i = 0; i < gnumBodies; i++)
 		{
 			qt.insert(bodies[i]);
 		}
-		
-		// Initialize mass-centers in the quadtree
 		qt.initalizeMassCenters();
 		
-		// Set the force working on each body by fetching it from the QuadTree
 		for (int i = 0; i < bodies.length; i++)
 		{
 			bodies[i].setF(qt.getForceOnBody(bodies[i]));
