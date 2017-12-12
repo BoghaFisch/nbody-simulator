@@ -26,9 +26,7 @@ public class MoverThread extends Thread
 	}
 	public void run()
 	{
-		// Move the bodies
 		moveBodies();
-		// Done, increment counterbarrier
 		cb.increment();
 	}
 	public void moveBodies()
