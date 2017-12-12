@@ -70,15 +70,13 @@ public class QuadTree
 			{
 				distance = 10;
 			}
-			// Calculate magnitude and direction
+			
 			magnitude = (g*b.getM()*massCenter.getM())/Math.pow(distance, 2);
 			direction = new Point2D.Double(massCenter.getPx()-b.getPx(), massCenter.getPy()-b.getPy());
 			
-			// Set new force on point
 			forceOnPoint.x = magnitude*direction.x/distance;
 			forceOnPoint.y = magnitude*direction.y/distance;
 		}
-		// If approxQuotitient > far and this is an inner node, call getForceOnBody on the children
 		else if (children != null && approxQuotient > far)
 		{
 			Point2D.Double force;
@@ -91,7 +89,6 @@ public class QuadTree
 				forceOnPoint.y += force.y;
 			}
 		}
-		// If approxQuotitient > far and this is a leaf-node, calculate actual force
 		else if (approxQuotient > far && children == null)
 		{
 			// Prevent bodies from being hurled away if getting to close to eachother my setting a minimum-distance to be used
@@ -99,11 +96,10 @@ public class QuadTree
 			{
 				distance = 10;
 			}
-			// Calculate magnitude and direction
+			
 			magnitude = (g*b.getM()*massCenter.getM())/Math.pow(distance, 2);
 			direction = new Point2D.Double(massCenter.getPx()-b.getPx(), massCenter.getPy()-b.getPy());
 			
-			// Update force on b
 			forceOnPoint.x = magnitude*direction.x/distance;
 			forceOnPoint.y = magnitude*direction.y/distance;
 		}
@@ -116,12 +112,10 @@ public class QuadTree
 	 */
 	public MassCenter initalizeMassCenters()
 	{
-		// If this is a leafnode with a Body in it, masscenter is in that body
 		if (!isInner && currentInhabitant != null)
 		{
 			massCenter.update(currentInhabitant);
 		}
-		// If this is an inner node, update with child-masscenters
 		else if (isInner)
 		{
 			MassCenter childMassCenter;
@@ -184,7 +178,6 @@ public class QuadTree
 	 */
 	public void subdivide()
 	{
-		// Init child-array
 		children = new QuadTree[4];
 		
 		// Calculate border-coordinates
