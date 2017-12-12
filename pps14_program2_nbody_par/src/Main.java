@@ -50,33 +50,23 @@ public class Main {
 		Simulation sim = null;
 		if (RANDOMIZE_INPUT)
 		{
-			// Randomize a simulation-instance
 			InputRandomizer ir = new InputRandomizer();
 			sim = ir.getRandomInstance(gnumBodies, numSteps, numWorkers, G);
 		}
 		else
 		{
-			// Read from file
 			try 
 			{
-				// Initialize Body-array
 				Body[] bodies = new Body[gnumBodies];
-				
-				// Initialize buffered reader from file
 				BufferedReader br = new BufferedReader(new FileReader("input.txt"));
 				
-				// Position and velocity
 				Point2D.Double p, v;
-				
-				// Force. An array in which each worker updates the position matching its worker-id
 				Point2D.Double[] f;
 				
-				// Mass
 				double m;
-				
 				String[] components;
 				String line;
-				// Create bodies by reading from file. file[0]=p.x, file[1]=p.y, file[2] = m
+				
 				for (int i = 0; i < gnumBodies; i++)
 				{
 					f = new Point2D.Double[numWorkers];
@@ -89,10 +79,8 @@ public class Main {
 						f[j] = new Point2D.Double();
 					bodies[i] = new Body(p, v, f, m);
 				}
-				// Done reading from file => close reader
-				br.close();
 				
-				// Return a new simulation instance
+				br.close();
 				return new Simulation(bodies, G, numSteps, numWorkers);
 			} 
 			catch (IOException e) 
@@ -105,13 +93,8 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		// Read args (initialize parameters)
 		readArgs(args);
-
-		// Get a simulation object with current parameters
 		Simulation sim = readInput();
-		
-		// Run simulation
 		sim.runSimulation();
 	}
 
