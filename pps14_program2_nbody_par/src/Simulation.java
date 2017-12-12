@@ -18,7 +18,6 @@ public class Simulation
 		this.gnumBodies = bodies.length;
 		this.numWorkers = numWorkers;
 		
-		// Create simulation visualizer (graphics) if requested
 		if (Main.DISPLAY_GRAPHICS)
 		{
 			vis = new Visualizer(bodies);
@@ -27,20 +26,13 @@ public class Simulation
 	public void runSimulation()
 	{
 		long s = System.nanoTime();
-		
-		// Create a threadpool with numWorkers workers
 		ExecutorService e = Executors.newFixedThreadPool(numWorkers);
 		
-		// For each timestep
 		for (int t = 0; t < numSteps; t++)
 		{
-			// Calculate the forces on each body
 			calculateForces(e);
-			
-			// Move the bodies
 			moveBodies(e);
 			
-			// Display graphicss
 			if (Main.DISPLAY_GRAPHICS)
 			{
 				vis.repaint();
@@ -63,15 +55,12 @@ public class Simulation
 	 */
 	public void calculateForces(ExecutorService e)
 	{
-		// Initialize CounterBarrier, used for preventing main-thread to continue before forcecalculations are done
 		CounterBarrier cb = new CounterBarrier(numWorkers);
-		
-		// Submit force-calculator tasks to the threadpool
 		for (int i = 0; i < numWorkers; i++)
 		{
 			e.submit(new ForceCalcThread(bodies, i, numWorkers, gnumBodies, g, cb));
 		}
-		// Until all tasks are complete => wait
+		
 		while (!cb.isDone())
 		{
 			Thread.yield();
@@ -86,12 +75,11 @@ public class Simulation
 		// CounterBarrier used for preventing main thread to continue
 		CounterBarrier cb = new CounterBarrier(numWorkers);
 		
-		// Create %numWorker% body-moving tasks
 		for (int i = 0; i < numWorkers; i++)
 		{
 			e.submit(new MoverThread(bodies, i, gnumBodies, numWorkers, g, cb));
 		}
-		// Wait until all tasks are complete
+		
 		while (!cb.isDone())
 		{
 			Thread.yield();
