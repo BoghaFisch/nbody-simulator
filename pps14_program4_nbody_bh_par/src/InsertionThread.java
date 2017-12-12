@@ -22,17 +22,12 @@ public class InsertionThread extends  Thread
 	}
 	public void run()
 	{
-		// For all bodies
 		for (int i = 0; i < bodies.length; i++)
 		{
-			// Try to insert it (will return false and not insert if the body isn't within the quadtree region)
 			qt.insert(bodies[i]);
 		}
 		
-		// Initialize masscenters for this subtree
 		qt.initalizeMassCenters();
-		
-		// Done. Increment counterbarrier
 		cb.increment();
 	}
 }
